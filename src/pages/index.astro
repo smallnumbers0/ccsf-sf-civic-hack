@@ -28,10 +28,10 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 						<div class="title-group">
 							<p class="presented-by">{'{'} CCSF CS CLUB {'}'} PRESENTS<span class="cursor">_</span></p>
 							<h1><span class="hack-text">SF CIVIC TECH HACK DAY;</span></h1>
-							<p class="inline-group">
-								<span class="event-date">{eventDate}</span>
+							<div class="inline-group">
+								<div class="event-date">{eventDate}</div>
 								<a href={registrationUrl} target="_blank" rel="noopener noreferrer" class="register-button">Register</a>
-							</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -40,7 +40,7 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 			<section class="partners-section">
 				<div class="container">
 					<div class="content-container">
-						<h2 class="partners-title">$ls</h2>
+						<h2 class="partners-title">$ ls</h2>
 						<div class="partners-grid">
 							<a href={actUrl} target="_blank" rel="noopener noreferrer" class="partner-card">
 								<div class="partner-content">
@@ -482,7 +482,32 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 					display: block;
 					width: 100%;
 					text-align: center;
-					margin: 0 0 0.5rem 0;
+					margin: 0;
+				}
+
+				.event-date {
+					margin-bottom: 1.5rem;
+				}
+
+				.event-date::before, .register-button::before {
+					display: inline-block;
+					margin-right: 0.5rem;
+				}
+
+				.inline-group {
+					display: flex;
+					flex-direction: column;
+					gap: 1rem;
+					width: 100%;
+					margin-top: 1.5rem;
+				}
+
+				.hero-content {
+					padding: 0 1rem;
+				}
+
+				.hack-text {
+					font-size: 2rem;
 				}
 			}
 
@@ -547,7 +572,7 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 			}
 
 			.register-button::before {
-				content: '>';
+				content: '$';
 				margin-right: 0.5rem;
 				font-weight: bold;
 			}
@@ -595,7 +620,7 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 					display: block;
 					width: 100%;
 					text-align: center;
-					margin: 0 0 0.5rem 0;
+					margin: 0;
 				}
 			}
 
