@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Partners from '../components/Partners.astro';
 import RegistrationForm from '../components/RegistrationForm.astro';
+import Logistics from '../components/Logistics.astro';
 
 const eventDate = "September 20th, 2025";
 const actUrl = "https://www.civictechnologists.org/";
@@ -10,6 +11,7 @@ const dataSfUrl = "https://datasf.org/";
 const csClubUrl = "https://ccsf-cs.club/";
 const discordUrl = "https://discord.gg/nrsPNfwBMY";
 const githubUrl = "https://github.com/smallnumbers0";
+const citycampUrl = "https://citycamp.com/";
 const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YXwvrafJT9S5Vs0MfVV9uvy3_nqjPyMdaLZ2g/formResponse";
 
 const partners = [
@@ -32,6 +34,11 @@ const partners = [
 		name: "CCSF CS Club Discord",
 		description: "Join our Discord server to stay connected",
 		url: discordUrl
+	},
+	{
+		name: "CityCamp",
+		description: "A global movement of citizens creating technology solutions for local government and community challenges",
+		url: citycampUrl
 	}
 ];
 ---
@@ -65,6 +72,8 @@ const partners = [
 
 			<Partners partners={partners} />
 		</main>
+
+		<Logistics />
 
 		<Footer csClubUrl={csClubUrl} githubUrl={githubUrl} discordUrl={discordUrl} />
 

@@ -1,0 +1,170 @@
+---
+// No props needed for this component as the data is static
+---
+
+<section class="logistics">
+	<div class="container">
+		<div class="content-container">
+			<h2 class="section-title">$ ls Event Logistics</h2>
+		
+		<div class="logistics-grid">
+			<div class="logistics-card">
+				<div class="card-header">
+					<h3 class="card-title">
+						<i class="fas fa-calendar-alt"></i>
+						Schedule
+					</h3>
+				</div>
+				<div class="card-content">
+					<p class="tba-text">To Be Announced</p>
+					<p class="card-description">
+						Detailed schedule will be shared closer to the event date. 
+						Stay tuned for updates on timing and activities.
+					</p>
+				</div>
+			</div>
+
+			<div class="logistics-card">
+				<div class="card-header">
+					<h3 class="card-title">
+						<i class="fas fa-map-marker-alt"></i>
+						Location
+					</h3>
+				</div>
+				<div class="card-content">
+					<p class="tba-text">To Be Announced</p>
+					<p class="card-description">
+						Event location will be confirmed soon. 
+						We're working on securing an accessible venue in San Francisco.
+					</p>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.logistics {
+		padding: 4rem 0;
+		background: var(--card-background);
+		width: 90%;
+		margin: 0 auto;
+		border-radius: 5px;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.content-container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.section-title {
+		text-align: left;
+		color: #00ff00;
+		font-family: var(--font-mono-primary);
+		margin-bottom: 2rem;
+		font-size: 1.5rem;
+		text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+	}
+
+	.logistics-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+
+	.logistics-card {
+		background: rgba(0, 0, 0, 0.7);
+		border: 1px solid rgba(176, 38, 255, 0.3);
+		border-radius: 8px;
+		padding: 0;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.logistics-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: linear-gradient(90deg, var(--primary-color), var(--text-green));
+	}
+
+	.logistics-card:hover {
+		border-color: var(--primary-color);
+		box-shadow: 0 0 20px rgba(176, 38, 255, 0.2);
+		transform: translateY(-2px);
+	}
+
+	.card-header {
+		padding: 1.5rem 1.5rem 1rem;
+		border-bottom: 1px solid rgba(176, 38, 255, 0.2);
+	}
+
+	.card-title {
+		font-family: var(--font-mono-primary);
+		font-size: 1.2rem;
+		color: var(--text-color);
+		margin: 0;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.card-title i {
+		color: var(--primary-color);
+		font-size: 1.1rem;
+	}
+
+	.card-content {
+		padding: 1.5rem;
+	}
+
+	.tba-text {
+		font-family: var(--font-mono-primary);
+		font-size: 1.1rem;
+		color: var(--text-green);
+		margin: 0 0 1rem 0;
+		text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+		font-weight: 500;
+	}
+
+	.card-description {
+		color: var(--text-muted);
+		line-height: 1.6;
+		margin: 0;
+		font-size: 0.9rem;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 0 1rem;
+		}
+
+		.logistics-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.section-title {
+			margin-bottom: 2rem;
+		}
+
+		.card-header, .card-content {
+			padding: 1rem;
+		}
+
+		.card-title {
+			font-size: 1.1rem;
+		}
+	}
+</style>
