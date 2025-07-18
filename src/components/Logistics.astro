@@ -1,11 +1,11 @@
 ---
-// No props needed for this component as the data is static
+
 ---
 
 <section class="logistics">
 	<div class="container">
 		<div class="content-container">
-			<h2 class="section-title">Event Logistics</h2>
+			<h2 class="section-title">$ Event Logistics</h2>
 		
 		<div class="logistics-grid">
 			<div class="logistics-card">
@@ -67,10 +67,24 @@
 	.section-title {
 		text-align: left;
 		color: #00ff00;
-		font-family: var(--font-mono-primary);
+		font-family: 'IBM Plex Sans', sans-serif, 'Fira Code', monospace;
 		margin-bottom: 2rem;
 		font-size: 1.5rem;
 		text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+		position: relative;
+		display: inline-block;
+	}
+
+	.section-title::after {
+		content: '_';
+		color: #00ff00;
+		animation: blink 1s infinite;
+		margin-left: 0.2rem;
+	}
+
+	@keyframes blink {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0; }
 	}
 
 	.logistics-grid {
