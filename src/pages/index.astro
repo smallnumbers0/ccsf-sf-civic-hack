@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Partners from '../components/Partners.astro';
 
 const eventDate = "September 20th, 2025";
 const actUrl = "https://www.civictechnologists.org/";
@@ -8,6 +10,29 @@ const csClubUrl = "https://ccsf-cs.club/";
 const discordUrl = "https://discord.gg/nrsPNfwBMY";
 const githubUrl = "https://github.com/smallnumbers0";
 const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YXwvrafJT9S5Vs0MfVV9uvy3_nqjPyMdaLZ2g/viewform?usp=dialog";
+
+const partners = [
+	{
+		name: "Alliance of Civic Technologists",
+		description: "Empowering civic innovation through technology",
+		url: actUrl
+	},
+	{
+		name: "DataSF",
+		description: "Transforming data into actionable insights for San Francisco",
+		url: dataSfUrl
+	},
+	{
+		name: "CCSF CS CLUB",
+		description: "Community of students who are passionate about technology and innovation",
+		url: csClubUrl
+	},
+	{
+		name: "CCSF CS Club Discord",
+		description: "Join our Discord server to stay connected",
+		url: discordUrl
+	}
+];
 ---
 
 <html lang="en">
@@ -37,83 +62,16 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 				</div>
 			</section>
 
-			<section class="partners-section">
-				<div class="container">
-					<div class="content-container">
-						<h2 class="partners-title">$ ls</h2>
-						<div class="partners-grid">
-							<a href={actUrl} target="_blank" rel="noopener noreferrer" class="partner-card">
-								<div class="partner-content">
-									<h3>Alliance of Civic Technologists</h3>
-									<p>Empowering civic innovation through technology</p>
-								</div>
-								<div class="partner-arrow">→</div>
-							</a>
-							<a href={dataSfUrl} target="_blank" rel="noopener noreferrer" class="partner-card">
-								<div class="partner-content">
-									<h3>DataSF</h3>
-									<p>Transforming data into actionable insights for San Francisco</p>
-								</div>
-								<div class="partner-arrow">→</div>
-							</a>
-							
-							<a href={csClubUrl} target="_blank" rel="noopener noreferrer" class="partner-card">
-								<div class="partner-content">
-									<h3>CCSF CS CLUB</h3>
-									<p>Community of students who are passionate about technology and innovation</p>
-								</div>
-								<div class="partner-arrow">→</div>
-							</a>
-							<a href={discordUrl} target="_blank" rel="noopener noreferrer" class="partner-card">
-								<div class="partner-content">
-									<h3>CCSF CS Club Discord</h3>
-									<p>Join our Discord server to stay connected</p>
-								</div>
-								<div class="partner-arrow">→</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</section>
+			<Partners partners={partners} />
 		</main>
 
-		<footer class="footer">
-			<div class="container">
-				<div class="footer-content">
-					<div class="footer-links">
-						<a href={csClubUrl} target="_blank" rel="noopener noreferrer">CCSF CS CLUB</a>
-						<a href={githubUrl} target="_blank" rel="noopener noreferrer">
-							<i class="fab fa-github"></i>
-						</a>
-						<a href={discordUrl} target="_blank" rel="noopener noreferrer">
-							<i class="fab fa-discord"></i>
-						</a>
-					</div>
-				</div>
-			</div>
-		</footer>
+		<Footer csClubUrl={csClubUrl} githubUrl={githubUrl} discordUrl={discordUrl} />
 
 		<style>
 			.hack-text {
-				font-family: 'Fira Code', monospace;
-				letter-spacing: -1px;
-			}
-			
-			.highlight {
-				color: var(--primary-color);
-				font-weight: 600;
-			}
-
-			.code-text {
-				font-family: 'Fira Code', monospace;
-				color: var(--text-muted);
-			}
-
-			.glitch-text {
-				font-family: 'Fira Code', monospace;
-				color: var(--primary-color);
-				position: relative;
-				display: inline-block;
+				font-family: 'IBM Plex Sans', sans-serif, 'IBM Plex Sans', sans-serif, 'Fira Code', monospace;
+				/* letter-spacing: -px; */
+				color: #00ff00;
 			}
 
 			.register-button {
@@ -124,7 +82,7 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 				border: 1px solid var(--primary-color);
 				border-radius: 4px;
 				text-decoration: none;
-				font-family: 'Fira Code', monospace;
+				font-family: 'IBM Plex Sans', sans-serif, 'Fira Code', monospace;
 				font-weight: 500;
 				cursor: pointer;
 				transition: all 0.3s ease;
@@ -133,244 +91,14 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 				box-shadow: 0 0 10px rgba(176, 38, 255, 0.2);
 			}
 
-			.register-button::before {
-				content: '>';
-				color: var(--primary-color);
-				margin-right: 0.5rem;
-				font-weight: bold;
-			}
-
-			.register-button .highlight {
-				position: relative;
-				z-index: 1;
-			}
-
-			.register-button:hover {
-				background: rgba(176, 38, 255, 0.1);
-				transform: translateY(-2px);
-				box-shadow: var(--accent-glow);
-			}
-
-			.register-button::after {
-				content: '';
-				position: absolute;
-				top: -50%;
-				left: -50%;
-				width: 200%;
-				height: 200%;
-				background: linear-gradient(
-					45deg,
-					transparent,
-					rgba(176, 38, 255, 0.1),
-					transparent
-				);
-				transform: rotate(45deg);
-				transition: 0.5s;
-			}
-
-			.register-button:hover::after {
-				transform: rotate(45deg) translate(100%, 100%);
-			}
-
 			.event-details {
 				background-color: var(--card-background);
-			}
-
-			.cta {
-				text-align: left;
-			}
-
-			.cta h2 {
-				margin-bottom: 2rem;
-			}
-
-			.cta-text {
-				margin-bottom: 2rem;
-				max-width: 600px;
-			}
-
-			.footer {
-				padding: 2rem 0;
-				background: rgba(0, 0, 0, 0.3);
-				backdrop-filter: blur(10px);
-				border-top: 1px solid rgba(255, 255, 255, 0.1);
-			}
-
-			.footer-content {
-				display: flex;
-				justify-content: flex-end;
-				align-items: center;
-				max-width: 800px;
-				margin: 0 auto;
-			}
-
-			.footer-text {
-				color: #888;
-				font-size: 0.9rem;
-			}
-
-			.footer-text a {
-				color: #888;
-				text-decoration: none;
-				transition: all 0.3s ease;
-				font-weight: 500;
-				letter-spacing: 0.5px;
-			}
-
-			.footer-text a:hover {
-				color: #b026ff;
-				text-shadow: 0 0 10px rgba(176, 38, 255, 0.3);
-			}
-
-			.footer-links {
-				display: flex;
-				gap: 1.5rem;
-				align-items: center;
-			}
-
-			.footer-links a {
-				color: #888;
-				text-decoration: none;
-				transition: all 0.3s ease;
-				font-weight: 500;
-				letter-spacing: 0.5px;
-			}
-
-			.footer-links a:hover {
-				color: #b026ff;
-				text-shadow: 0 0 10px rgba(176, 38, 255, 0.3);
-			}
-
-			.footer-links i {
-				font-size: 1.2rem;
-			}
-
-			@media (max-width: 768px) {
-				.footer-content {
-					justify-content: center;
-				}
-			}
-
-			.partners-section {
-				padding: 4rem 0;
-				background: var(--card-background);
-				border-top: var(--neon-border);
-				border-bottom: var(--neon-border);
-			}
-
-			.partners-title {
-				text-align: left;
-				color: #00ff00;
-				font-family: 'Fira Code', monospace;
-				margin-bottom: 2rem;
-				font-size: 1.5rem;
-				text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-				position: relative;
-				display: inline-block;
-			}
-
-			.partners-title::before {
-				content: '';
-				color: #00ff00;
-				margin-right: 0.5rem;
-				opacity: 0.8;
-			}
-
-			.partners-title::after {
-				content: '_';
-				color: #00ff00;
-				animation: blink 1s infinite;
-				margin-left: 0.2rem;
-			}
-
-			@keyframes blink {
-				0%, 100% { opacity: 1; }
-				50% { opacity: 0; }
-			}
-
-			.partners-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-				gap: 2rem;
-			}
-
-			.partner-card {
-				background: var(--background-color);
-				padding: 2rem;
-				border-radius: 0.5rem;
-				border: var(--neon-border);
-				transition: all 0.3s ease;
-				text-decoration: none;
-				color: var(--text-color);
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				overflow: hidden;
-				position: relative;
-			}
-
-			.partner-card::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: linear-gradient(45deg, transparent, rgba(176, 38, 255, 0.05), transparent);
-				transform: translateX(-100%);
-				transition: transform 0.6s ease;
-			}
-
-			.partner-card:hover {
-				transform: translateY(-5px);
-				box-shadow: var(--accent-glow);
-				background: var(--card-hover-bg);
-			}
-
-			.partner-card:hover::before {
-				transform: translateX(100%);
-			}
-
-			.partner-content {
-				flex: 1;
-			}
-
-			.partner-content h3 {
-				color: var(--primary-color);
-				margin-bottom: 0.5rem;
-				font-family: 'Fira Code', monospace;
-			}
-
-			.partner-content p {
-				color: var(--text-muted);
-				font-size: 0.9rem;
-				line-height: 1.4;
-			}
-
-			.partner-arrow {
-				font-family: 'Fira Code', monospace;
-				margin-left: 1rem;
-				font-size: 1.5rem;
-				color: var(--primary-color);
-				opacity: 0;
-				transform: translateX(-10px);
-				transition: all 0.3s ease;
-			}
-
-			.partner-card:hover .partner-arrow {
-				opacity: 1;
-				transform: translateX(0);
-			}
-
-			@media (max-width: 768px) {
-				.partners-grid {
-					grid-template-columns: 1fr;
-				}
 			}
 
 			.hero {
 				text-align: left;
 				padding: 8rem 0;
+				
 			}
 
 			.hero-content {
@@ -389,7 +117,7 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 
 			.presented-by {
 				color: #00ff00;
-				font-family: 'Fira Code', monospace;
+				font-family: 'IBM Plex Sans', sans-serif, 'Fira Code', monospace;
 				text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 				margin-bottom: 1rem;
 				font-size: 1.5rem;
@@ -437,36 +165,6 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 				margin-right: 0.5rem;
 				font-weight: bold;
 				vertical-align: middle;
-			}
-
-		
-
-			.register-button:hover {
-				box-shadow: 
-					0 0 20px rgba(0, 255, 0, 0.3),
-					0 0 40px rgba(0, 255, 0, 0.1);
-				animation: glitch 0.3s infinite;
-			}
-
-			.register-button .highlight {
-				animation: textGlitch 0.3s infinite;
-			}
-
-			@keyframes textGlitch {
-				0%, 100% { 
-					transform: none;
-					opacity: 1;
-				}
-				25% {
-					transform: translate(-2px, 1px);
-					opacity: 0.75;
-					color: #0ff;
-				}
-				75% {
-					transform: translate(2px, -1px);
-					opacity: 0.75;
-					color: #0f0;
-				}
 			}
 
 			@media (max-width: 768px) {
@@ -522,12 +220,6 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 				margin: 0 auto;
 			}
 
-			.partners-section .content-container,
-			.section .content-container {
-				max-width: 800px;
-				margin: 0 auto;
-			}
-
 			.section {
 				padding: 4rem 0;
 				position: relative;
@@ -547,7 +239,7 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 				line-height: 42px;
 				font-size: 1rem;
 				margin: 0;
-				font-family: 'Fira Code', monospace;
+				font-family: 'IBM Plex Sans', sans-serif, 'Fira Code', monospace;
 				color: #00ff00;
 				text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 				position: relative;
