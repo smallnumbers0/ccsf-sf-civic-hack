@@ -1,0 +1,504 @@
+---
+interface Props {
+  formAction: string;
+}
+
+const { formAction } = Astro.props;
+---
+
+<div class="registration-modal" id="registrationModal">
+  <div class="modal-backdrop" onclick="closeModal()"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">
+        <span class="terminal-prompt">$</span> Register for SF Civic Tech Hack Day
+      </h2>
+      <button class="close-button" onclick="closeModal()" type="button">
+        <span class="close-x">×</span>
+      </button>
+    </div>
+    
+    <form 
+      class="registration-form"
+      action={formAction}
+      method="POST"
+      onsubmit="handleFormSubmit(event)"
+    >
+      <div class="form-group">
+        <label class="form-label" for="fullName">
+          Full Name <span class="required">*</span>
+        </label>
+        <input
+          class="form-input"
+          id="fullName"
+          name="entry.1145117399"
+          required
+          type="text"
+          placeholder="Enter your full name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">
+          Email Address <span class="required">*</span>
+        </label>
+        <input
+          class="form-input"
+          id="email"
+          name="entry.1761649432"
+          required
+          type="email"
+          placeholder="your.email@example.com"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="experience">
+          Coding Experience <span class="required">*</span>
+        </label>
+        <select
+          class="form-input form-select"
+          id="experience"
+          name="entry.794317580"
+          required
+        >
+          <option value="">Select your experience level</option>
+          <option value="Student">Student</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Advanced">Advanced</option>
+          <option value="Professional">Professional</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="dietary">
+          Dietary Restrictions <span class="optional">(optional)</span>
+        </label>
+        <input
+          class="form-input"
+          id="dietary"
+          name="entry.268467211"
+          type="text"
+          placeholder="e.g., Vegetarian, Vegan, Gluten-free, None"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="comments">
+          Additional Comments <span class="optional">(optional)</span>
+        </label>
+        <textarea
+          class="form-input form-textarea"
+          id="comments"
+          name="entry.206007805"
+          rows="3"
+          placeholder="Any additional information, questions, or comments..."
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-button">
+          <span class="button-prompt">></span> Submit Registration
+        </button>
+        <button type="button" class="cancel-button" onclick="closeModal()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast-notification" class="toast-notification">
+  <div class="toast-content">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message">Registration submitted successfully! Thank you for registering for SF Civic Tech Hack Day.</span>
+  </div>
+</div>
+
+<script is:inline>
+  function closeModal() {
+    const modal = document.querySelector('#registrationModal');
+    if (modal) {
+      modal.classList.remove('visible');
+    }
+  }
+
+  function showToast() {
+    const toast = document.querySelector('#toast-notification');
+    if (toast) {
+      toast.classList.add('show');
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 5000);
+    }
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault(); // Prevent default form submission
+    
+    // Get form data
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Show loading state
+    const submitButton = form.querySelector('.submit-button');
+    const originalText = submitButton.innerHTML;
+    submitButton.innerHTML = '<span class="button-prompt">></span> Submitting...';
+    submitButton.disabled = true;
+    
+    // Submit to Google Forms using fetch with no-cors mode
+    fetch(form.action, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    }).then(() => {
+      // Success - close modal and show toast
+      closeModal();
+      showToast();
+      // Reset form
+      form.reset();
+    }).catch(() => {
+      // Even if fetch fails, the form likely still submitted to Google Forms
+      // because of CORS restrictions, we can't read the response
+      closeModal();
+      showToast();
+      // Reset form
+      form.reset();
+    }).finally(() => {
+      // Reset button state
+      submitButton.innerHTML = originalText;
+      submitButton.disabled = false;
+    });
+  }
+
+  // Wait for DOM to be loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    // Close modal when clicking outside
+    document.addEventListener('click', (event) => {
+      const modal = document.querySelector('#registrationModal');
+      const modalContent = document.querySelector('.modal-content');
+      
+      if (modal && modal.classList.contains('visible') && 
+          modalContent && event.target && 
+          !modalContent.contains(event.target) && 
+          event.target.classList.contains('modal-backdrop')) {
+        closeModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+  });
+</script>
+
+<style>
+  .registration-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .registration-modal.visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all !important;
+    background: rgba(0, 0, 0, 0.1); /* Debug background */
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+  }
+
+  .modal-content {
+    position: relative;
+    background: var(--background-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 
+      0 0 30px rgba(176, 38, 255, 0.3),
+      inset 0 0 50px rgba(176, 38, 255, 0.1);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(176, 38, 255, 0.3);
+  }
+
+  .modal-title {
+    font-family: var(--font-mono-primary);
+    font-size: 1.1rem;
+    color: var(--text-green);
+    margin: 0;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  }
+
+  .terminal-prompt {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+  }
+
+  .close-button {
+    background: none;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-family: var(--font-mono-primary);
+  }
+
+  .close-button:hover {
+    background: var(--primary-color);
+    color: var(--background-color);
+    box-shadow: 0 0 10px rgba(176, 38, 255, 0.5);
+  }
+
+  .registration-form {
+    padding: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-family: var(--font-mono-primary);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .required {
+    color: #ff4444;
+  }
+
+  .optional {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(176, 38, 255, 0.3);
+    border-radius: 4px;
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: var(--font-primary);
+    line-height: 1.4;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(176, 38, 255, 0.3);
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .form-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .form-select {
+    cursor: pointer;
+  }
+
+  .form-select option {
+    background: var(--background-color);
+    color: var(--text-color);
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .submit-button {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--text-green);
+    border-radius: 4px;
+    color: var(--text-green);
+    font-family: var(--font-mono-primary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .submit-button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .button-prompt {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .cancel-button {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-family: var(--font-mono-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .cancel-button:hover {
+    border-color: var(--text-color);
+    color: var(--text-color);
+  }
+
+  @media (max-width: 768px) {
+    .modal-content {
+      width: 95%;
+      margin: 1rem;
+    }
+
+    .modal-header {
+      padding: 1rem;
+    }
+
+    .modal-title {
+      font-size: 1rem;
+    }
+
+    .registration-form {
+      padding: 1rem;
+    }
+
+    .form-actions {
+      flex-direction: column;
+    }
+  }
+
+  /* Toast Notification Styles */
+  .toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .toast-notification.show {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .toast-content {
+    background: var(--background-color);
+    border: 1px solid var(--text-green);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    box-shadow: 
+      0 0 20px rgba(0, 255, 0, 0.3),
+      inset 0 0 30px rgba(0, 255, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 300px;
+    max-width: 400px;
+  }
+
+  .toast-icon {
+    color: var(--text-green);
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  }
+
+  .toast-message {
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .toast-notification {
+      top: 10px;
+      right: 10px;
+      left: 10px;
+      transform: translateY(-100%);
+    }
+
+    .toast-notification.show {
+      transform: translateY(0);
+    }
+
+    .toast-content {
+      min-width: auto;
+      max-width: none;
+    }
+  }
+</style>

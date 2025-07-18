@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Partners from '../components/Partners.astro';
+import RegistrationForm from '../components/RegistrationForm.astro';
 
 const eventDate = "September 20th, 2025";
 const actUrl = "https://www.civictechnologists.org/";
@@ -9,7 +10,7 @@ const dataSfUrl = "https://datasf.org/";
 const csClubUrl = "https://ccsf-cs.club/";
 const discordUrl = "https://discord.gg/nrsPNfwBMY";
 const githubUrl = "https://github.com/smallnumbers0";
-const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YXwvrafJT9S5Vs0MfVV9uvy3_nqjPyMdaLZ2g/viewform?usp=dialog";
+const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YXwvrafJT9S5Vs0MfVV9uvy3_nqjPyMdaLZ2g/formResponse";
 
 const partners = [
 	{
@@ -55,7 +56,7 @@ const partners = [
 							<h1><span class="hack-text">SF CIVIC TECH HACK DAY;</span></h1>
 							<div class="inline-group">
 								<div class="event-date">{eventDate}</div>
-								<a href={registrationUrl} target="_blank" rel="noopener noreferrer" class="register-button">Register</a>
+								<button class="register-button" onclick="openRegistrationModal()" type="button">Register</button>
 							</div>
 						</div>
 					</div>
@@ -66,6 +67,30 @@ const partners = [
 		</main>
 
 		<Footer csClubUrl={csClubUrl} githubUrl={githubUrl} discordUrl={discordUrl} />
+
+		<RegistrationForm formAction={registrationUrl} />
+
+		<script is:inline>
+			function openRegistrationModal() {
+				console.log('Button clicked!'); // Debug log
+				const modal = document.querySelector('#registrationModal');
+				console.log('Modal element:', modal); // Debug log
+				if (modal) {
+					modal.classList.add('visible');
+					console.log('Modal should be visible now'); // Debug log
+					console.log('Modal classes:', modal.classList.toString()); // Debug log
+				} else {
+					console.error('Modal not found!'); // Debug log
+				}
+			}
+
+			// Wait for page to load
+			document.addEventListener('DOMContentLoaded', function() {
+				console.log('DOM loaded, checking for modal...');
+				const modal = document.querySelector('#registrationModal');
+				console.log('Modal found on DOM load:', modal);
+			});
+		</script>
 
 		<style>
 			.hack-text {
@@ -89,6 +114,8 @@ const partners = [
 				position: relative;
 				overflow: hidden;
 				box-shadow: 0 0 10px rgba(176, 38, 255, 0.2);
+				color: var(--text-color);
+				font-size: 1rem;
 			}
 
 			.event-details {
@@ -261,6 +288,7 @@ const partners = [
 				font-weight: 500;
 				cursor: pointer;
 				transition: all 0.3s ease;
+				color: #00ff00;
 			}
 
 			.register-button::before {
