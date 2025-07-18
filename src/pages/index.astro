@@ -6,8 +6,8 @@ import Modal from '../components/Modal.astro';
 const eventDate = "September 20th, 2025";
 const actUrl = "https://www.civictechnologists.org/";
 const dataSfUrl = "https://datasf.org/";
-const csClubUrl = "https://ccsf-cs.club/"
-const discordUrl = "https://discord.gg/nrsPNfwBMY"
+const csClubUrl = "https://ccsf-cs.club/";
+const discordUrl = "https://discord.gg/nrsPNfwBMY";
 const githubUrl = "https://github.com/smallnumbers0";
 ---
 
@@ -35,9 +35,9 @@ const githubUrl = "https://github.com/smallnumbers0";
 								<div class="event-date">
 									<p><span class="highlight">{eventDate}</span></p>
 								</div>
-								<div class="event-date" data-modal="registration-modal" role="button" tabindex="0">
-									<p><span class="highlight">Register</span></p>
-								</div>
+								<button class="event-date" data-modal="registration-modal">
+									<span class="highlight">Lets Hack</span>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -378,18 +378,22 @@ const githubUrl = "https://github.com/smallnumbers0";
 				max-width: fit-content;
 			}
 
-			.event-date[role="button"] {
+			button.event-date {
 				cursor: pointer;
 				user-select: none;
 				transition: all 0.3s ease;
+				font-size: inherit;
+				font-family: inherit;
+				color: inherit;
+				display: inline-block;
 			}
 
-			.event-date[role="button"]:hover {
+			button.event-date:hover {
 				background: rgba(176, 38, 255, 0.2);
 				box-shadow: var(--accent-glow);
 			}
 
-			.event-date[role="button"]:focus {
+			button.event-date:focus {
 				outline: none;
 				box-shadow: 0 0 0 2px var(--primary-color);
 			}
