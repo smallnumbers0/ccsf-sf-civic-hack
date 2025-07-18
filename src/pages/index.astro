@@ -522,15 +522,25 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 				line-height: 42px;
 				font-size: 1rem;
 				margin: 0;
+				font-family: 'Fira Code', monospace;
+				color: #00ff00;
+				text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+				position: relative;
+				overflow: hidden;
 			}
 
 			.event-date {
 				margin-right: 1rem;
 			}
 
+			.event-date::before {
+				content: '$';
+				margin-right: 0.5rem;
+				opacity: 0.8;
+			}
+
 			.register-button {
 				text-decoration: none;
-				font-family: 'Fira Code', monospace;
 				font-weight: 500;
 				cursor: pointer;
 				transition: all 0.3s ease;
@@ -538,7 +548,6 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 
 			.register-button::before {
 				content: '>';
-				color: #00ff00;
 				margin-right: 0.5rem;
 				font-weight: bold;
 			}
@@ -546,6 +555,39 @@ const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLScfH-QkcKFy3YX
 			.event-date .highlight, .register-button .highlight {
 				color: #00ff00;
 				text-shadow: none;
+			}
+
+			.register-button:hover {
+				background: rgba(0, 0, 0, 0.9);
+				box-shadow: 
+					0 0 20px rgba(0, 255, 0, 0.2),
+					0 0 40px rgba(0, 255, 0, 0.1);
+				transform: translateY(-1px);
+			}
+
+			.register-button:hover::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 200%;
+				height: 100%;
+				background: linear-gradient(
+						90deg,
+						transparent,
+						rgba(0, 255, 0, 0.2),
+						transparent
+					);
+				animation: glitch-scan 1s ease-in-out;
+			}
+
+			@keyframes glitch-scan {
+				0% {
+					left: -100%;
+				}
+				100% {
+					left: 100%;
+				}
 			}
 
 			@media (max-width: 768px) {
