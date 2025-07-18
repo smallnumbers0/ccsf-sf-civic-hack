@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  --primary-color: #b026ff;
+  --secondary-color: #7000ff;
+  --background-color: #000000;
+  --card-background: #0a0118;
+  --text-color: #ffffff;
+  --text-muted: #a3a3a3;
+  --accent-glow: 0 0 20px rgba(176, 38, 255, 0.5);
+  --link-color: #d8b4fe;
+  --link-hover-color: #f0abfc;
+  --neon-border: 1px solid rgba(176, 38, 255, 0.3);
+  --card-hover-bg: #150829;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  background-color: var(--background-color);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(176, 38, 255, 0.15) 0%, transparent 50%),
+    linear-gradient(to bottom, rgba(176, 38, 255, 0.05) 0%, transparent 100%);
+  min-height: 100vh;
+}
+
+code, pre {
+  font-family: 'Fira Code', monospace;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--background-color), var(--card-background));
+  color: white;
+  padding: 6rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: var(--neon-border);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 45%, rgba(176, 38, 255, 0.15) 50%, transparent 55%);
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(176, 38, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(112, 0, 255, 0.15) 0%, transparent 50%);
+}
+
+@keyframes gradient {
+  0% { background-position: 200% 200%; }
+  100% { background-position: -200% -200%; }
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(176, 38, 255, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  padding: 4rem 0;
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: var(--card-background);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  border: var(--neon-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--accent-glow);
+  background: var(--card-hover-bg);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-family: 'Fira Code', monospace;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(176, 38, 255, 0.2);
+}
+
+
+.event-date {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(176, 38, 255, 0.1);
+  border-radius: 0.5rem;
+  border: var(--neon-border);
+}
+
+.highlight {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(176, 38, 255, 0.5);
+}
+
+.partners-section {
+  background: var(--background-color);
+  border-top: var(--neon-border);
+  border-bottom: var(--neon-border);
+}
+
+.partner-card {
+  background: var(--card-background);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.partner-card:hover {
+  background: var(--card-hover-bg);
+  box-shadow: 
+    0 0 30px rgba(0, 0, 0, 0.7),
+    0 0 50px rgba(176, 38, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .section {
+    padding: 2rem 0;
+  }
+} 

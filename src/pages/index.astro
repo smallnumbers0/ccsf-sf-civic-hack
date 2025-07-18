@@ -1,5 +1,14 @@
 ---
+import '../styles/global.css';
+import RegistrationForm from '../components/RegistrationForm.astro';
+import Modal from '../components/Modal.astro';
 
+const eventDate = "September 20th, 2025";
+const actUrl = "https://www.civictechnologists.org/";
+const dataSfUrl = "https://datasf.org/";
+const csClubUrl = "https://ccsf-cs.club/"
+const discordUrl = "https://discord.gg/nrsPNfwBMY"
+const githubUrl = "https://github.com/smallnumbers0";
 ---
 
 <html lang="en">
@@ -8,9 +17,421 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta name="description" content="Join us for SF CIVIC TECH X ACT - A collaborative hackathon presented by CCSF CS CLUB, bringing together students and civic tech enthusiasts to solve San Francisco's challenges." />
+		<title>SF CIVIC TECH X ACT | CCSF CS CLUB</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<main>
+			<section class="hero">
+				<div class="container">
+					<div class="hero-content">
+						<div class="title-group">
+							<p class="presented-by">{'{'} CCSF CS CLUB {'}'} PRESENTS</p>
+							<h1><span class="hack-text">SF CIVIC TECH HACK DAY;</span></h1>
+						</div>
+						<div class="hero-actions">
+							<div class="date-action-group">
+								<div class="event-date">
+									<p><span class="highlight">{eventDate}</span></p>
+								</div>
+								<div class="event-date" data-modal="registration-modal" role="button" tabindex="0">
+									<p><span class="highlight">Register</span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="partners-section">
+				<div class="container">
+					<div class="content-container">
+						<h2 class="partners-title">$ls</h2>
+						<div class="partners-grid">
+							<a href={actUrl} target="_blank" rel="noopener noreferrer" class="partner-card">
+								<div class="partner-content">
+									<h3>Alliance of Civic Technologists</h3>
+									<p>Empowering civic innovation through technology</p>
+								</div>
+								<div class="partner-arrow">→</div>
+							</a>
+							<a href={dataSfUrl} target="_blank" rel="noopener noreferrer" class="partner-card">
+								<div class="partner-content">
+									<h3>DataSF</h3>
+									<p>Transforming data into actionable insights for San Francisco</p>
+								</div>
+								<div class="partner-arrow">→</div>
+							</a>
+							
+							<a href={csClubUrl} target="_blank" rel="noopener noreferrer" class="partner-card">
+								<div class="partner-content">
+									<h3>CCSF CS CLUB</h3>
+									<p>Community of students who are passionate about technology and innovation</p>
+								</div>
+								<div class="partner-arrow">→</div>
+							</a>
+							<a href={discordUrl} target="_blank" rel="noopener noreferrer" class="partner-card">
+								<div class="partner-content">
+									<h3>CCSF CS Club Discord</h3>
+									<p>Join our Discord server to stay connected</p>
+								</div>
+								<div class="partner-arrow">→</div>
+							</a>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer">
+			<div class="container">
+				<div class="footer-content">
+					<div class="footer-links">
+						<a href={csClubUrl} target="_blank" rel="noopener noreferrer">CCSF CS CLUB</a>
+						<a href={githubUrl} target="_blank" rel="noopener noreferrer">
+							<i class="fab fa-github"></i>
+						</a>
+						<a href={discordUrl} target="_blank" rel="noopener noreferrer">
+							<i class="fab fa-discord"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<Modal id="registration-modal">
+			<h2 class="modal-title">Registration Form</h2>
+			<RegistrationForm />
+		</Modal>
+
+		<style>
+			.hack-text {
+				font-family: 'Fira Code', monospace;
+				letter-spacing: -1px;
+			}
+			
+			.highlight {
+				color: var(--primary-color);
+				font-weight: 600;
+			}
+
+			.code-text {
+				font-family: 'Fira Code', monospace;
+				color: var(--text-muted);
+			}
+
+			.glitch-text {
+				font-family: 'Fira Code', monospace;
+				color: var(--primary-color);
+				position: relative;
+				display: inline-block;
+			}
+
+			.register-button {
+				margin-top: 2rem;
+			}
+
+			.event-details {
+				background-color: var(--card-background);
+			}
+
+			.cta {
+				text-align: left;
+			}
+
+			.cta h2 {
+				margin-bottom: 2rem;
+			}
+
+			.cta-text {
+				margin-bottom: 2rem;
+				max-width: 600px;
+			}
+
+			.footer {
+				padding: 2rem 0;
+				background: rgba(0, 0, 0, 0.3);
+				backdrop-filter: blur(10px);
+				border-top: 1px solid rgba(255, 255, 255, 0.1);
+			}
+
+			.footer-content {
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.footer-text {
+				color: #888;
+				font-size: 0.9rem;
+			}
+
+			.footer-text a {
+				color: #888;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				font-weight: 500;
+				letter-spacing: 0.5px;
+			}
+
+			.footer-text a:hover {
+				color: #b026ff;
+				text-shadow: 0 0 10px rgba(176, 38, 255, 0.3);
+			}
+
+			.footer-links {
+				display: flex;
+				gap: 1.5rem;
+				align-items: center;
+			}
+
+			.footer-links a {
+				color: #888;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				font-weight: 500;
+				letter-spacing: 0.5px;
+			}
+
+			.footer-links a:hover {
+				color: #b026ff;
+				text-shadow: 0 0 10px rgba(176, 38, 255, 0.3);
+			}
+
+			.footer-links i {
+				font-size: 1.2rem;
+			}
+
+			@media (max-width: 768px) {
+				.footer-content {
+					justify-content: center;
+				}
+			}
+
+			button.button {
+				background: var(--primary-color);
+				color: white;
+				border: none;
+				padding: 0.75rem 1.5rem;
+				border-radius: 0.375rem;
+				font-family: 'Fira Code', monospace;
+				font-weight: 500;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				font-size: 1rem;
+			}
+
+			button.button:hover {
+				background: var(--secondary-color);
+				transform: translateY(-2px);
+				box-shadow: var(--accent-glow);
+			}
+
+			.partners-section {
+				padding: 4rem 0;
+				background: var(--card-background);
+				border-top: var(--neon-border);
+				border-bottom: var(--neon-border);
+			}
+
+			.partners-title {
+				text-align: left;
+				color: var(--text-color);
+				font-family: 'Fira Code', monospace;
+				margin-bottom: 2rem;
+				font-size: 1.5rem;
+			}
+
+			.partners-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+			}
+
+			.partner-card {
+				background: var(--background-color);
+				padding: 2rem;
+				border-radius: 0.5rem;
+				border: var(--neon-border);
+				transition: all 0.3s ease;
+				text-decoration: none;
+				color: var(--text-color);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				overflow: hidden;
+				position: relative;
+			}
+
+			.partner-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(45deg, transparent, rgba(176, 38, 255, 0.05), transparent);
+				transform: translateX(-100%);
+				transition: transform 0.6s ease;
+			}
+
+			.partner-card:hover {
+				transform: translateY(-5px);
+				box-shadow: var(--accent-glow);
+				background: var(--card-hover-bg);
+			}
+
+			.partner-card:hover::before {
+				transform: translateX(100%);
+			}
+
+			.partner-content {
+				flex: 1;
+			}
+
+			.partner-content h3 {
+				color: var(--primary-color);
+				margin-bottom: 0.5rem;
+				font-family: 'Fira Code', monospace;
+			}
+
+			.partner-content p {
+				color: var(--text-muted);
+				font-size: 0.9rem;
+				line-height: 1.4;
+			}
+
+			.partner-arrow {
+				font-family: 'Fira Code', monospace;
+				margin-left: 1rem;
+				font-size: 1.5rem;
+				color: var(--primary-color);
+				opacity: 0;
+				transform: translateX(-10px);
+				transition: all 0.3s ease;
+			}
+
+			.partner-card:hover .partner-arrow {
+				opacity: 1;
+				transform: translateX(0);
+			}
+
+			@media (max-width: 768px) {
+				.partners-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			.hero {
+				text-align: left;
+				padding: 8rem 0;
+			}
+
+			.hero-content {
+				max-width: 800px;
+				margin: 0 auto;
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+				position: relative;
+				z-index: 1;
+			}
+
+			.title-group {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 1rem;
+				width: 100%;
+			}
+
+			.hero-actions {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 1.5rem;
+			}
+
+			.presented-by {
+				font-family: 'Fira Code', monospace;
+				color: var(--text-muted);
+				font-size: 1.2rem;
+				letter-spacing: 2px;
+			}
+
+			.hack-text {
+				font-size: clamp(2rem, 5vw, 3rem);
+				line-height: 1.2;
+				display: block;
+			}
+
+			.event-date {
+				margin: 0;
+				padding: 0.75rem 1.5rem;
+				background: rgba(176, 38, 255, 0.1);
+				border-radius: 0.5rem;
+				border: var(--neon-border);
+				max-width: fit-content;
+			}
+
+			.event-date[role="button"] {
+				cursor: pointer;
+				user-select: none;
+				transition: all 0.3s ease;
+			}
+
+			.event-date[role="button"]:hover {
+				background: rgba(176, 38, 255, 0.2);
+				box-shadow: var(--accent-glow);
+			}
+
+			.event-date[role="button"]:focus {
+				outline: none;
+				box-shadow: 0 0 0 2px var(--primary-color);
+			}
+
+			@media (max-width: 768px) {
+				.hero-content {
+					gap: 1.5rem;
+				}
+
+				.hack-text {
+					font-size: 2rem;
+				}
+			}
+
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 2rem;
+			}
+
+			.content-container {
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.partners-section .content-container,
+			.section .content-container {
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.section {
+				padding: 4rem 0;
+				position: relative;
+			}
+
+			.date-action-group {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+			}
+
+		</style>
 	</body>
 </html>
